@@ -29,19 +29,22 @@ class PolylineResult {
   String? endAddress;
   String? startAddress;
   String? overviewPolyline;
+  List<Map<String, dynamic>>? directions;
 
-  PolylineResult(
-      {this.status,
-      this.points = const [],
-      this.errorMessage = "",
-      this.alternatives = const [],
-      this.distanceTexts,
-      this.distanceValues,
-      this.totalDistanceValue,
-      this.durationTexts,
-      this.durationValues,
-      this.totalDurationValue,
-      this.endAddress,
-      this.startAddress,
-      this.overviewPolyline});
+  PolylineResult({
+    this.status,
+    this.points = const [],
+    this.errorMessage = "",
+    this.alternatives = const [],
+    this.distanceTexts,
+    this.distanceValues,
+    this.totalDistanceValue,
+    this.durationTexts,
+    this.durationValues,
+    this.totalDurationValue,
+    this.endAddress,
+    this.startAddress,
+    this.directions,
+    this.overviewPolyline,
+  });
 }

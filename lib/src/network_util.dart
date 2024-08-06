@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_polyline_points/src/utils/polyline_decoder.dart';
 import 'package:flutter_polyline_points/src/utils/polyline_request.dart';
 import 'package:http/http.dart' as http;
@@ -21,6 +22,7 @@ class NetworkUtil {
       request.toUri(apiKey: googleApiKey),
       headers: request.headers,
     );
+    // debugPrint('${response.body}');
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);
       if (parsedJson["status"]?.toLowerCase() == STATUS_OK &&
@@ -28,6 +30,22 @@ class NetworkUtil {
           parsedJson["routes"].isNotEmpty) {
         List<dynamic> routeList = parsedJson["routes"];
         for (var route in routeList) {
+
+          List<Map<String, dynamic>> extractedData = [];
+
+          for (var leg in route['legs']) {
+            for (var step in leg['steps']) {
+              Map<String, dynamic> stepData = {
+                'html_instructions': step['html_instructions'],
+                'start_location': step['start_location'],
+                'end_location': step['end_location']
+              };
+              extractedData.add(stepData);
+            }
+          }
+
+          print(extractedData);
+
           results.add(PolylineResult(
             points: PolylineDecoder.run(route["overview_polyline"]["points"]),
             errorMessage: "",
@@ -53,6 +71,7 @@ class NetworkUtil {
             ],
             endAddress: route["legs"].last['end_address'],
             startAddress: route["legs"].first['start_address'],
+            directions: extractedData,
           ));
         }
       } else {

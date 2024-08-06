@@ -4,7 +4,7 @@ version: 2.1.0
 homepage: https://github.com/Dammyololade/flutter_polyline_points
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.4.0 <4.0.0'
 
 dependencies:
   flutter:
