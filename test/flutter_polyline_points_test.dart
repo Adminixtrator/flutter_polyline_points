@@ -1,11 +1,11 @@
-import 'package:flutter_polyline_points/src/constants.dart';
+// import 'package:flutter_polyline_points/src/constants.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 void main() {
   test('get list of coordinates from two geographical positions', () async {
-    final key = Constants.API_KEY;
+    final key = 'Constants.API_KEY';
     PolylineResult result = await PolylinePoints().getRouteBetweenCoordinates(
       request: PolylineRequest(
           origin: PointLatLng(6.5212402, 3.3679965),

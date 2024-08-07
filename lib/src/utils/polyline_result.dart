@@ -29,7 +29,7 @@ class PolylineResult {
   String? endAddress;
   String? startAddress;
   String? overviewPolyline;
-  List<Map<String, dynamic>>? directions;
+  List<StepData>? directions;
 
   PolylineResult({
     this.status,
@@ -46,5 +46,19 @@ class PolylineResult {
     this.startAddress,
     this.directions,
     this.overviewPolyline,
+  });
+}
+
+// add instructions data
+class StepData {
+
+  String htmlInstructions;
+  Map<String, dynamic> startLocation;
+  Map<String, dynamic> endLocation;
+
+  StepData({
+    required this.htmlInstructions,
+    required this.startLocation,
+    required this.endLocation,
   });
 }

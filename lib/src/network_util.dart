@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_polyline_points/src/utils/polyline_decoder.dart';
 import 'package:flutter_polyline_points/src/utils/polyline_request.dart';
 import 'package:http/http.dart' as http;
@@ -30,21 +28,18 @@ class NetworkUtil {
           parsedJson["routes"].isNotEmpty) {
         List<dynamic> routeList = parsedJson["routes"];
         for (var route in routeList) {
-
-          List<Map<String, dynamic>> extractedData = [];
+          List<StepData> extractedData = [];
 
           for (var leg in route['legs']) {
             for (var step in leg['steps']) {
-              Map<String, dynamic> stepData = {
-                'html_instructions': step['html_instructions'],
-                'start_location': step['start_location'],
-                'end_location': step['end_location']
-              };
+              StepData stepData = StepData(
+                htmlInstructions: step['html_instructions'],
+                startLocation: step['start_location'],
+                endLocation: step['end_location'],
+              );
               extractedData.add(stepData);
             }
           }
-
-          print(extractedData);
 
           results.add(PolylineResult(
             points: PolylineDecoder.run(route["overview_polyline"]["points"]),
